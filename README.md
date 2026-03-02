@@ -113,6 +113,8 @@ The evaluation process will automatically assess the generated images across all
       <tr><td>✅ Qwen3-VL-32B-Thinking</td><td>81.9</td><td>72.9</td><td>75.4</td><td>79.8</td><td>77.5</td><td>2</td></tr>
       <tr><td>Qwen3-VL-30B-A3B-Instruct</td><td>83.1</td><td>61.9</td><td>59.1</td><td>74.2</td><td>69.6</td><td>2</td></tr>
       <tr><td>✅ Qwen3-VL-30B-A3B-Thinking</td><td>82.5</td><td>73.9</td><td>75.4</td><td>77.7</td><td>77.4</td><td>2</td></tr>
+      <tr><td>Qwen3.5-27B</td><td>82.4</td><td>76.0</td><td>81.8</td><td>83.4</td><td>80.9</td><td>2</td></tr>
+      <tr><td>Qwen3.5-35B-A3B</td><td>81.2</td><td>72.9</td><td>80.4</td><td>82.6</td><td>79.3</td><td>2</td></tr>
       <tr><td>GPT-4o</td><td>78.3</td><td>67.5</td><td>63.6</td><td>72.0</td><td>70.3</td><td>-</td></tr>
       <tr><td>OpenAI o3</td><td>83.5</td><td>77.8</td><td>80.4</td><td>86.8</td><td>82.1</td><td>-</td></tr>
       <tr><td>OpenAI o4 mini</td><td>81.9</td><td>74.7</td><td>77.0</td><td>83.0</td><td>79.1</td><td>-</td></tr>
