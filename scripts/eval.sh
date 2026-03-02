@@ -2,7 +2,7 @@
 
 MODELS="Qwen-Image"
 DIMENSION="C-MI, C-MA, C-MR, C-TR, R-LR, R-BR, R-HR, R-PR, R-GR, R-AR, R-CR, R-RR"
-MLLM="Gemini_2_5_Flash"
+MLLM="Qwen3_VL_30B_A3B_Thinking"
 
 # GPU mapping for different models
 declare -A MLLM_GPU_MAP=(
@@ -15,6 +15,8 @@ declare -A MLLM_GPU_MAP=(
     ["Qwen3_VL_30B_A3B_Thinking"]=2
     ["Qwen3_VL_235B_A22B_Instruct"]=8
     ["Qwen3_VL_235B_A22B_Thinking"]=8
+    ["Qwen3_5_27B"]=2
+    ["Qwen3_5_35B_A3B"]=2
     ["Gemini_2_5_Flash"]=-1  # API-based model, no GPU specification needed
 )
 

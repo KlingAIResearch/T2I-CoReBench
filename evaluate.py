@@ -101,15 +101,26 @@ def start_evaluation_qwen(args, mllm_path, batch_size=64, max_rounds=3, initial_
     )
 
     # Qwen2.5-VL Usage Guide: https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen2.5-VL.html
-    if "Qwen2_5" in args.mllm:
+    if "Qwen2_5_VL" in args.mllm:
         pass
     # Qwen3-VL Usage Guide: https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3-VL.html
-    elif "Qwen3" in args.mllm:
+    elif "Qwen3_VL" in args.mllm:
         os.environ['VLLM_WORKER_MULTIPROC_METHOD'] = 'spawn'
         llm_config.update(
             dtype="bfloat16",
             enable_expert_parallel='_A' in args.mllm,  # Enable expert parallelism only for MoE models (e.g., Qwen3_VL_30B_A3B_Instruct)
             distributed_executor_backend="mp",
+        )
+    # Qwen3.5 Usage Guide: https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html
+    elif "Qwen3_5" in args.mllm:
+        os.environ['VLLM_WORKER_MULTIPROC_METHOD'] = 'spawn'
+        llm_config.update(
+            dtype="bfloat16",
+            enable_expert_parallel='_A' in args.mllm,  # Enable expert parallelism only for MoE models (e.g., Qwen3_5_35B_A3B)
+            distributed_executor_backend="mp", 
+            reasoning_parser="qwen3",
+            mm_processor_cache_type="shm", 
+            enable_prefix_caching=True,
         )
     llm = LLM(**llm_config)
         
@@ -194,7 +205,7 @@ def start_evaluation_qwen(args, mllm_path, batch_size=64, max_rounds=3, initial_
 
             # region [2. Evaluation: Multi-round inference]
             def extract_fn(text):
-                if 'thinking' in args.mllm.lower():
+                if 'thinking' in args.mllm.lower() or 'qwen3_5' in args.mllm.lower():
                     return text.split('</think>\n\n')[-1] if '</think>\n\n' in text else ""
                 return text
 
@@ -372,8 +383,12 @@ if __name__ == '__main__':
         FLUX.1-schnell, FLUX.1-dev, FLUX.1-Krea-dev | SD-3-Medium, SD-3.5-Medium, SD-3.5-Large | PixArt-Alpha, PixArt-Sigma | Qwen-Image
     """)
     parser.add_argument('--mllm', type=str, help="""
-        Qwen-series: Qwen2_5_VL_72B, Qwen3_VL_8B_Instruct, Qwen3_VL_8B_Thinking, Qwen3_VL_32B_Instruct, Qwen3_VL_32B_Thinking, Qwen3_VL_30B_A3B_Instruct, Qwen3_VL_30B_A3B_Thinking, Qwen3_VL_235B_A22B_Instruct, Qwen3_VL_235B_A22B_Thinking
-        Gemini-series: Gemini_2_5_Flash
+        [Open-source]
+            Qwen2.5 : Qwen2_5_VL_72B_Instruct
+            Qwen3   : Qwen3_VL_{8B, 32B, 30B_A3B, 235B_A22B}_{Instruct|Thinking}
+            Qwen3.5 : Qwen3_5_{27B, 35B_A3B}
+        [Closed-source]
+            Gemini  : Gemini_2_5_Flash
     """)
     parser.add_argument('--gen_eval_file', type=str, help="""
         Composition: C-MI, C-MA, C-MR, C-TR | Reasoning: R-LR, R-BR, R-HR, R-PR, R-GR, R-AR, R-CR, R-RR
@@ -386,7 +401,7 @@ if __name__ == '__main__':
     seed_everything(args.seed)
 
     MLLMs = {
-        "Qwen2_5_VL_72B"              : "Qwen/Qwen2.5-VL-72B-Instruct",
+        "Qwen2_5_VL_72B_Instruct"     : "Qwen/Qwen2.5-VL-72B-Instruct",
         "Qwen3_VL_8B_Instruct"        : "Qwen/Qwen3-VL-8B-Instruct",
         "Qwen3_VL_8B_Thinking"        : "Qwen/Qwen3-VL-8B-Thinking",
         "Qwen3_VL_32B_Instruct"       : "Qwen/Qwen3-VL-32B-Instruct",
@@ -395,6 +410,8 @@ if __name__ == '__main__':
         "Qwen3_VL_30B_A3B_Thinking"   : "Qwen/Qwen3-VL-30B-A3B-Thinking",
         "Qwen3_VL_235B_A22B_Instruct" : "Qwen/Qwen3-VL-235B-A22B-Instruct",
         "Qwen3_VL_235B_A22B_Thinking" : "Qwen/Qwen3-VL-235B-A22B-Thinking",
+        "Qwen3_5_27B"                 : "Qwen/Qwen3.5-27B",
+        "Qwen3_5_35B_A3B"             : "Qwen/Qwen3.5-35B-A3B",
         "Gemini_2_5_Flash"            : ["gemini-2.5-flash", os.getenv("GEMINI_API_KEY")],
     }
     
