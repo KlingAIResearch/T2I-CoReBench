@@ -386,7 +386,7 @@ if __name__ == '__main__':
         [Open-source]
             Qwen2.5 : Qwen2_5_VL_72B_Instruct
             Qwen3   : Qwen3_VL_{8B, 32B, 30B_A3B, 235B_A22B}_{Instruct|Thinking}
-            Qwen3.5 : Qwen3_5_{27B, 35B_A3B}
+            Qwen3.5 : Qwen3_5_{9B, 27B, 35B_A3B}
         [Closed-source]
             Gemini  : Gemini_2_5_Flash
     """)
@@ -410,6 +410,7 @@ if __name__ == '__main__':
         "Qwen3_VL_30B_A3B_Thinking"   : "Qwen/Qwen3-VL-30B-A3B-Thinking",
         "Qwen3_VL_235B_A22B_Instruct" : "Qwen/Qwen3-VL-235B-A22B-Instruct",
         "Qwen3_VL_235B_A22B_Thinking" : "Qwen/Qwen3-VL-235B-A22B-Thinking",
+        "Qwen3_5_9B"                  : "Qwen/Qwen3.5-9B",
         "Qwen3_5_27B"                 : "Qwen/Qwen3.5-27B",
         "Qwen3_5_35B_A3B"             : "Qwen/Qwen3.5-35B-A3B",
         "Gemini_2_5_Flash"            : ["gemini-2.5-flash", os.getenv("GEMINI_API_KEY")],

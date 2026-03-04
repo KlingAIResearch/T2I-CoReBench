@@ -15,6 +15,7 @@ declare -A MLLM_GPU_MAP=(
     ["Qwen3_VL_30B_A3B_Thinking"]=2
     ["Qwen3_VL_235B_A22B_Instruct"]=8
     ["Qwen3_VL_235B_A22B_Thinking"]=8
+    ["Qwen3_5_9B"]=1
     ["Qwen3_5_27B"]=2
     ["Qwen3_5_35B_A3B"]=2
     ["Gemini_2_5_Flash"]=-1  # API-based model, no GPU specification needed
