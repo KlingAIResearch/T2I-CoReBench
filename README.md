@@ -44,6 +44,7 @@
 **Overview of our T2I-CoReBench.** (a) Our benchmark comprehensively covers two fundamental T2I capabilities (i.e., *composition* and *reasoning*), further refined into 12 dimensions. (b–e) Our benchmark poses greater challenges to advanced T2I models, with higher compositional density than [DPG-Bench](https://arxiv.org/abs/2403.05135) and greater reasoning intensity than [R2I-Bench](https://arxiv.org/abs/2505.23493), enabling clearer performance differentiation across models under real-world complexities. Each image is scored based on the ratio of correctly generated elements.
 
 ## 📣 News
+- `2026/03` 🌟 We have added benchmark results evaluated by [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) and [Qwen3.5-35B-A3B](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) in [🏆 Leaderboard](https://t2i-corebench.github.io/#leaderboard).
 - `2026/03` 🌟 We have updated the evaluation results of [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview).
 - `2026/02` 🌟 We have updated the evaluation results of [Z-Image](https://huggingface.co/Tongyi-MAI/Z-Image).
 - `2026/01` 🔥 T2I-CoReBench is accepted to ICLR 2026. Thanks to all co-authors!
@@ -85,6 +86,8 @@ We provide evaluation code supporting various MLLMs, including **Gemini 2.5 Flas
 
 > [!NOTE]
 > If Gemini 2.5 Flash is not available due to closed-source API costs, we recommend using [Qwen3-VL-32B-Thinking](https://huggingface.co/Qwen/Qwen3-VL-32B-Thinking) or [Qwen3-VL-30B-A3B-Thinking](https://huggingface.co/Qwen/Qwen3-VL-30B-A3B-Thinking) as alternatives. Both models offer a strong balance between human consistency and computational cost in open-source MLLMs (see [Table](#table-human-alignment) below). **Qwen3-VL-30B-A3B-Thinking** is more efficient due to its MoE architecture, making it a more cost-effective choice. Comprehensive evaluation results for different MLLM evaluators are available in our [🏆 Leaderboard](https://t2i-corebench.github.io/#leaderboard).
+> 
+> `2026/03` With the release of recent open-source MLLMs [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) and [Qwen3.5-35B-A3B](https://huggingface.co/Qwen/Qwen3.5-35B-A3B), which demonstrate stronger human alignment in [Table](#table-human-alignment) below, we have added the corresponding benchmark evaluation results to our [🏆 Leaderboard](https://t2i-corebench.github.io/#leaderboard). We recommend using these evaluators to obtain more reliable and human-aligned evaluation results.
 
 For the **Gemini series**, please refer to the [Gemini documentation](https://ai.google.dev/gemini-api/docs) for environment setup. An official API key `GEMINI_API_KEY` should be set as an environment variable in `evaluate.py`.  For the **Qwen series**, please follow the [vLLM User Guide](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3-VL.html) and consult their [official repository](https://github.com/QwenLM/Qwen3-VL) for environment setup.
 
@@ -108,14 +111,14 @@ The evaluation process will automatically assess the generated images across all
       <tr><td>InternVL3-78B</td><td>70.8</td><td>56.8</td><td>56.5</td><td>67.7</td><td>62.9</td><td>4</td></tr>
       <tr><td>GLM4.5V-106B</td><td>78.0</td><td>61.3</td><td>60.3</td><td>71.8</td><td>67.8</td><td>4</td></tr>
       <tr><td>Qwen3-VL-8B-Instruct</td><td>72.0</td><td>56.2</td><td>56.6</td><td>65.4</td><td>62.5</td><td>1</td></tr>
-      <tr><td>✅ Qwen3-VL-8B-Thinking</td><td>79.6</td><td>68.9</td><td>70.7</td><td>76.2</td><td>73.8</td><td>1</td></tr>
+      <tr><td>Qwen3-VL-8B-Thinking</td><td>79.6</td><td>68.9</td><td>70.7</td><td>76.2</td><td>73.8</td><td>1</td></tr>
       <tr><td>Qwen3-VL-32B-Instruct</td><td>80.8</td><td>63.4</td><td>60.6</td><td>73.3</td><td>69.5</td><td>2</td></tr>
       <tr><td>✅ Qwen3-VL-32B-Thinking</td><td>81.9</td><td>72.9</td><td>75.4</td><td>79.8</td><td>77.5</td><td>2</td></tr>
       <tr><td>Qwen3-VL-30B-A3B-Instruct</td><td>83.1</td><td>61.9</td><td>59.1</td><td>74.2</td><td>69.6</td><td>2</td></tr>
       <tr><td>✅ Qwen3-VL-30B-A3B-Thinking</td><td>82.5</td><td>73.9</td><td>75.4</td><td>77.7</td><td>77.4</td><td>2</td></tr>
-      <tr><td>Qwen3.5-9B</td><td>78.7</td><td>73.2</td><td>79.2</td><td>82.4</td><td>78.4</td><td>1</td></tr>
+      <tr><td>✅ Qwen3.5-9B</td><td>78.7</td><td>73.2</td><td>79.2</td><td>82.4</td><td>78.4</td><td>1</td></tr>
       <tr><td>Qwen3.5-27B</td><td>82.4</td><td>76.0</td><td>81.8</td><td>83.4</td><td>80.9</td><td>2</td></tr>
-      <tr><td>Qwen3.5-35B-A3B</td><td>81.2</td><td>72.9</td><td>80.4</td><td>82.6</td><td>79.3</td><td>2</td></tr>
+      <tr><td>✅ Qwen3.5-35B-A3B</td><td>81.2</td><td>72.9</td><td>80.4</td><td>82.6</td><td>79.3</td><td>2</td></tr>
       <tr><td>GPT-4o</td><td>78.3</td><td>67.5</td><td>63.6</td><td>72.0</td><td>70.3</td><td>-</td></tr>
       <tr><td>OpenAI o3</td><td>83.5</td><td>77.8</td><td>80.4</td><td>86.8</td><td>82.1</td><td>-</td></tr>
       <tr><td>OpenAI o4 mini</td><td>81.9</td><td>74.7</td><td>77.0</td><td>83.0</td><td>79.1</td><td>-</td></tr>
